@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PM Store – Neon Pro Edition</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    /* 🔹 Animated Gradient Background */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+      background: linear-gradient(270deg, #001f4d, #0048b5, #0078ff, #ffb800);
+      background-size: 800% 800%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 🔹 Header */
+    header {
+      padding: 28px 15px 20px;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid gold;
+      border-radius: 0 0 20px 20px;
+      position: relative;
+    }
+
+    header img {
+      width: 250px;
+      margin: 0 auto 12px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255,215,0,0.7);
+      animation: logoGlow 3s infinite alternate;
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+    }
+
+    @keyframes logoGlow {
+      0% { box-shadow: 0 0 20px rgba(255,215,0,0.4); }
+      100% { box-shadow: 0 0 45px rgba(255,215,0,0.8); }
+    }
+
+    header img:hover { transform: scale(1.08) rotate(1deg); }
+
+    header h1 {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px gold, 0 0 20px #ffd700;
+      animation: neonText 2s ease-in-out infinite alternate;
+      margin-bottom: 5px;
+    }
+
+    header .sub-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #fffacd;
+      text-shadow: 0 0 5px gold;
+    }
+
+    @keyframes neonText {
+      0% { text-shadow: 0 0 5px #ffd700, 0 0 10px gold; }
+      50% { text-shadow: 0 0 10px #ffd700, 0 0 20px gold; }
+      100% { text-shadow: 0 0 15px #ffd700, 0 0 30px gold; }
+    }
+
+    /* 🔹 Card */
+    .card {
+      background: rgba(0,0,0,0.6);
+      margin: 25px auto;
+      max-width: 720px;
+      padding: 25px;
+      border-radius: 22px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: all 0.4s ease;
+    }
+
+    .card:hover { transform: translateY(-5px); box-shadow: 0 14px 35px rgba(0,0,0,0.7); }
+
+    /* 🔹 Branches */
+    .branches-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 8px;
+    }
+
+    .branch-logo {
+      text-align: center;
+      flex: 0 0 auto;
+      transition: transform 0.4s ease;
+    }
+
+    .branch-logo:hover { transform: rotateY(15deg) scale(1.1); }
+
+    .circle-logo {
+      background: linear-gradient(145deg, #0048b5, #0078ff);
+      color: #ffd700;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 12px;
+      box-shadow: 0 0 8px gold, inset 0 2px 4px rgba(255,255,255,0.2);
+      margin: 0 auto 4px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .circle-logo:hover {
+      background: linear-gradient(145deg, #ffb800, #ffd700);
+      box-shadow: 0 0 15px gold, inset 0 2px 6px rgba(255,255,255,0.3);
+    }
+
+    .branch-name {
+      font-weight: 600;
+      font-size: 11px;
+      color: #fffacd;
+    }
+
+    .branch-info {
+      font-size: 13px;
+      color: #ffd700;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
+    /* 🔹 Buttons */
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0048b5, #0078ff);
+      color: #ffd700;
+      padding: 13px 22px;
+      border-radius: 50px;
+      margin: 10px 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      gap: 10px;
+      box-shadow: 0 0 15px gold;
+      position: relative;
+      overflow: hidden;
+    }
+
+    a.btn::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: rgba(255,255,255,0.4);
+      transform: skewX(-20deg);
+      transition: all 0.5s ease;
+    }
+
+    a.btn:hover::before { left: 120%; }
+    a.btn:hover { transform: translateY(-3px); background: linear-gradient(135deg,#ffb800,#ffd700); box-shadow: 0 0 25px gold; }
+    a.btn img { border-radius: 50%; transition: transform 0.3s ease; }
+    a.btn:hover img { transform: scale(1.2); }
+
+    /* 🔹 QR Code */
+    #qrcode { margin-top: 15px; display:flex; justify-content:center; }
+
+    /* 🔹 Footer */
+    footer {
+      font-size: 14px;
+      color: #ffd700;
+      margin: 25px 0 0;
+      font-weight: bold;
+      background: rgba(0,0,0,0.5);
+      padding: 15px 10px;
+      border-top: 3px solid gold;
+      border-radius: 20px 20px 0 0;
+    }
+
+    /* 🔹 Animations */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-30px); } to { opacity:1; transform:translateY(0); } }
+
+    /* 🔹 Responsive */
+    @media (max-width: 600px) {
+      header img { width: 150px; }
+      header h1 { font-size: 26px; }
+      header .sub-title { font-size: 13px; }
+      .card { padding: 18px; margin: 15px; }
+      a.btn { padding: 12px 18px; font-size: 14px; }
+      .circle-logo { width: 46px; height: 46px; font-size: 11px; }
+      .branch-name { font-size: 10px; }
+    }
+
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <img src="logo.png" alt="PM Store Logo" />
+    <h1>PM STORE</h1>
+    <div class="sub-title">Affordable Grocery | Best Quality | All Essentials Under One Roof</div>
+  </header>
+
+  <section class="card">
+    <h2>📍 Our Branches</h2>
+    <div class="branches-logos">
+      <a href="https://maps.app.goo.gl/cLRdRQxSqupgAAon6" target="_blank" class="branch-logo">
+        <div class="circle-logo">PM 1</div><div class="branch-name">SHAHDRA</div>
+      </a>
+      <a href="https://maps.app.goo.gl/2zsSMQsZv7ivQFU7A" target="_blank" class="branch-logo">
+        <div class="circle-logo">PM 2</div><div class="branch-name">BEGUM KOT</div>
+      </a>
+      <a href="https://maps.app.goo.gl/ooFmwF8fASPhbTcP7" target="_blank" class="branch-logo">
+        <div class="circle-logo">PM 3</div><div class="branch-name">KOT ABDUL MALIK</div>
+      </a>
+      <a href="https://maps.app.goo.gl/JS3rEj3yiTC3j1dU9" target="_blank" class="branch-logo">
+        <div class="circle-logo">PM 4</div><div class="branch-name">SHEIKHUPURA</div>
+      </a>
+      <a href="https://maps.app.goo.gl/qeHW6HHg4D3Psdxg6" target="_blank" class="branch-logo">
+        <div class="circle-logo">PM 5</div><div class="branch-name">REHMAN GARDEN</div>
+      </a>
+    </div>
+    <div class="branch-info">5 Branches in Lahore, Pakistan</div>
+  </section>
+
+  <section class="card">
+    <h2>📞 Contact Us</h2>
+    <a class="btn" href="https://wa.me/923224516558?text=Assalamualaikum%20PM%20Store%20se%20raabta%20karna%20chahta%20hun" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="22" height="22" /> WhatsApp Chat
+    </a>
+    <a class="btn" href="https://chat.whatsapp.com/YOUR-GROUP-LINK" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" width="22" height="22" /> Join Group
+    </a>
+    <a class="btn" href="https://wa.me/923200002313?text=Assalamualaikum%20PM%20Store,%20main%20apna%20CV%20submit%20karna%20chahta%20hun" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" width="22" height="22" /> Drop Your CV
+    </a>
+  </section>
+
+  <section class="card">
+    <h2>🌐 Follow Us</h2>
+    <a class="btn" href="https://www.facebook.com/share/16ZBGTGYZg/" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="22" height="22" /> Facebook
+    </a>
+    <a class="btn" href="https://www.instagram.com/pm_store_786" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="22" height="22" /> Instagram
+    </a>
+    <a class="btn" href="https://www.tiktok.com/@pmstore05" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" width="22" height="22" /> TikTok
+    </a>
+  </section>
+
+  <section class="card">
+    <h2>📲 Open with QR</h2>
+    <div id="qrcode"></div>
+  </section>
+
+  <footer>© <span id="year"></span> PM Store – All rights reserved.</footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    new QRCode(document.getElementById("qrcode"), {
+      text: window.location.href,
+      width: 140,
+      height: 140,
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+
+</body>
+</html>
